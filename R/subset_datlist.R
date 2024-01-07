@@ -2,7 +2,8 @@
 ## File Version: 0.374
 
 subset_datlist <- function( datlist, subset=TRUE,
-            select=NULL, expr_subset=NULL, index=NULL, toclass="datlist")
+            select=NULL, expr_subset=NULL, index=NULL, toclass="datlist",
+            modify_levels = TRUE)
 {
     CALL <- match.call()
     #*** check here for classes
@@ -72,7 +73,9 @@ subset_datlist <- function( datlist, subset=TRUE,
             d1 <- subset( d1, subset=subset0, select=select, drop=FALSE)
         }
         #- check for factor levels
-        d1 <- subset_datlist_modify_factor_levels(dat=d1)
+        if (modify_levels){
+            d1 <- subset_datlist_modify_factor_levels(dat=d1)
+        }
         datlist2[[ii]] <- d1
     }
 
